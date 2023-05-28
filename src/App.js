@@ -16,8 +16,16 @@ import {
   Input,
   FormHelperText,
 } from '@chakra-ui/react';
+import useEngine from './useEngine';
 
 function App() {
+  const { engine, facts } = useEngine();
+  engine
+    .run(facts)
+    .then(({ events }) => {
+      events.map(event => console.log(event.params.message))
+    })
+
   return (
     <ChakraProvider theme={theme}>
       <Box h="100vh" w="100vw" bgGradient="linear(135deg, cornsilk 0%, lemonchiffon 100%)">
