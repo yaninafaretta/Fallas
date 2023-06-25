@@ -6,35 +6,63 @@ import {
   Flex,
   Heading,
   Stack,
-  Button,
-  Progress,
   Box,
-  ButtonGroup,
   FormControl,
   FormLabel,
-  Input,
-  FormHelperText,
+  Select,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  Tooltip,
+  Checkbox,
 } from '@chakra-ui/react';
 import beers from './beers.json'
 import { Engine } from 'json-rules-engine'
 
 const engine = new Engine(beers.decisions)
 
+const colors = ['clara', 'rubia', 'roja', 'negra']
+const cuerpos = ['ligero', 'medio', 'completo', 'cremoso']
+const maltas = ['pálida', 'caramelo', 'tostada', 'chocolate', 'negra']
+const IBUs = ['sin amargor', 'poco amargor', 'amarga', 'amargor moderado', 'muy amarga']
+const ABVs = ['sin alcohol', 'bajo', 'moderado', 'elevado', 'muy elevado']
+const maridajes = ['salado', 'torta', 'carnes rojas', 'carnes blancas', 'quesos', 'sola']
+
 function App() {
   const [beer, setBeer] = React.useState(null)
+
+  const [color, setColor] = React.useState(null)
+  const [cuerpo, setCuerpo] = React.useState(null)
+  const [malta, setMalta] = React.useState(null)
+  const [IBU, setIBU] = React.useState(null)
+  const [ABV, setABV] = React.useState(null)
+  const [maridaje, setMaridaje] = React.useState([])
+
+  const toggleMaridaje = (m) => {
+    if (maridaje.includes(m)) {
+      setMaridaje(maridaje.filter(x => x !== m))
+    } else {
+      setMaridaje([...maridaje, m])
+    }
+  }
 
   React.useEffect(() => {
     const b = async () =>
       setBeer(await engine
         .run({
-          color: 'negra', cuerpo: 'completo', malta: 'negra', IBU: 4, ABV: 3, maridaje: ["torta"]
+          color,
+          cuerpo,
+          malta,
+          IBU,
+          ABV,
+          maridaje,
         })
         .then(({ results }) => {
-          return results[0].event.type
+          return results[0]?.event.type
         }))
     b()
-  }, [])
-  console.log(beer)
+  }, [ABV, IBU, color, cuerpo, malta, maridaje])
 
   return (
     <ChakraProvider>
@@ -49,9 +77,6 @@ function App() {
               Beer{' '}
               <Text as="span" color={'orange.400'}>XP</Text>
             </Heading>
-            <Text color={'gray.500'} maxW={'3xl'}>
-              descripcion copada
-            </Text>
             <Stack spacing={6} direction={'row'}>
               <Box
                 borderWidth="2px"
@@ -61,38 +86,44 @@ function App() {
                 p={8}
                 m={8}
                 as="form"
+                w="70vw"
               >
-                <Progress
-                  // ir agregando aca en base a cuan lleno esta el form
-                  // pasar a `isIndeterminate` cuando se esta greppeando el resultado
-                  value={10}
-                  hasStripe
-                  colorScheme='orange'
-                  mb={4}
-                  mx={8}
-                  isAnimated
-                />
                 <Flex>
                   <FormControl mr={8}>
                     <FormLabel>
                       Color
                     </FormLabel>
-                    <Input />
+                    <Select placeholder='Color'
+                      onChange={e => setColor(e.target.value)}
+                    >
+                      {colors.map(color =>
+                        <option key={color} value={color}>{color}</option>)}
+                    </Select>
                   </FormControl>
 
                   <FormControl>
                     <FormLabel>
                       Cuerpo
                     </FormLabel>
-                    <Input />
+                    <Select placeholder='Cuerpo'
+                      onChange={e => setCuerpo(e.target.value)}
+                    >
+                      {cuerpos.map(cuerpo =>
+                        <option key={cuerpo} value={cuerpo}>{cuerpo}</option>)}
+                    </Select>
                   </FormControl>
                 </Flex>
+
                 <FormControl mt="2%">
                   <FormLabel>
                     Malta
                   </FormLabel>
-                  <Input />
-                  <FormHelperText>descripcion de algo que haga falta</FormHelperText>
+                  <Select placeholder='Malta'
+                    onChange={e => setMalta(e.target.value)}
+                  >
+                    {maltas.map(malta =>
+                      <option key={malta} value={malta}>{malta}</option>)}
+                  </Select>
                 </FormControl>
 
                 <FormControl mt={8}>
@@ -101,28 +132,77 @@ function App() {
                       <FormLabel>
                         ABV
                       </FormLabel>
-                      <Input />
+                      <Slider
+                        min={0}
+                        max={ABVs.length - 1}
+                        step={1}
+                        onChange={setABV}
+                        colorScheme="orange"
+                      >
+                        <SliderTrack>
+                          <SliderFilledTrack />
+                        </SliderTrack>
+                        <Tooltip
+                          hasArrow
+                          bg='orange.400'
+                          placement='bottom'
+                          isOpen={ABV !== null}
+                          label={ABVs[ABV]}
+                        >
+                          <SliderThumb />
+                        </Tooltip>
+                      </Slider>
                     </FormControl>
 
                     <FormControl>
                       <FormLabel>
                         IBU
                       </FormLabel>
-                      <Input />
+                      <Slider
+                        min={0}
+                        max={IBUs.length - 1}
+                        step={1}
+                        onChange={setIBU}
+                        colorScheme="orange"
+                      >
+                        <SliderTrack>
+                          <SliderFilledTrack />
+                        </SliderTrack>
+                        <Tooltip
+                          hasArrow
+                          bg='orange.400'
+                          placement='bottom'
+                          isOpen={IBU !== null}
+                          label={IBUs[IBU]}
+                        >
+                          <SliderThumb />
+                        </Tooltip>
+                      </Slider>
                     </FormControl>
                   </Flex>
+
+                  <FormControl mt="4%">
+                    <FormLabel>
+                      Maridajes
+                    </FormLabel>
+                    <Stack spacing={5} direction='row'>
+                      {maridajes.map(m =>
+                        <Checkbox key={m} colorScheme='orange'
+                          isChecked={maridaje.includes(m)}
+                          onChange={() => { toggleMaridaje(m) }}
+                        >
+                          {m}
+                        </Checkbox>)
+                      }
+                    </Stack>
+                  </FormControl>
                 </FormControl>
-                <ButtonGroup mt="5%" w="100%" flex justifyContent={"center"}>
-                  <Button
-                    w="7rem"
-                    colorScheme="orange"
-                    variant="outline"
-                  >
-                    Cerveza?
-                  </Button>
-                </ButtonGroup>
               </Box>
             </Stack>
+            {beer && (<Heading fontSize="4xl">
+              Tu cerveza perfecta es...{' '}
+              <Text as="span" color={'orange.500'}>{beer}</Text>
+            </Heading>)}
           </Stack>
         </Container>
       </Box>
