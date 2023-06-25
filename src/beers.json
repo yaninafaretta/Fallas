@@ -1,0 +1,76 @@
+{
+	"name": "beers",
+	"attributes": [
+		{
+			"name": "cuerpo",
+			"type": "string"
+		},
+		{
+			"name": "color",
+			"type": "string"
+		},
+		{
+			"name": "malta",
+			"type": "string"
+		},
+		{
+			"name": "IBU",
+			"type": "number"
+		},
+		{
+			"name": "ABV",
+			"type": "number"
+		},
+		{
+			"name": "maridaje",
+			"type": "array"
+		}
+	],
+	"decisions": [
+		{
+			"conditions": {
+				"any": [
+					{
+						"fact": "cuerpo",
+						"operator": "equal",
+						"value": "completo"
+					},
+					{
+						"fact": "color",
+						"operator": "equal",
+						"value": "negra"
+					},
+					{
+						"fact": "malta",
+						"operator": "equal",
+						"value": "negra"
+					},
+					{
+						"fact": "IBU",
+						"operator": "equal",
+						"value": 4
+					},
+					{
+						"fact": "ABV",
+						"operator": "equal",
+						"value": 3
+					},
+					{
+						"fact": "maridaje",
+						"operator": "in",
+						"value": [
+							"torta",
+							"carnes rojas",
+							"carnes blancas",
+							"sola"
+						]
+					}
+				]
+			},
+			"event": {
+				"type": "stout",
+				"params": {}
+			}
+		}
+	]
+}

@@ -3,7 +3,6 @@ import {
   ChakraProvider,
   Container,
   Text,
-  theme,
   Flex,
   Heading,
   Stack,
@@ -16,18 +15,29 @@ import {
   Input,
   FormHelperText,
 } from '@chakra-ui/react';
-import useEngine from './useEngine';
+import beers from './beers.json'
+import { Engine } from 'json-rules-engine'
+
+const engine = new Engine(beers.decisions)
 
 function App() {
-  const { engine, facts } = useEngine();
-  engine
-    .run(facts)
-    .then(({ events }) => {
-      events.map(event => console.log(event.params.message))
-    })
+  const [beer, setBeer] = React.useState(null)
+
+  React.useEffect(() => {
+    const b = async () =>
+      setBeer(await engine
+        .run({
+          color: 'negra', cuerpo: 'completo', malta: 'negra', IBU: 4, ABV: 3, maridaje: ["torta"]
+        })
+        .then(({ results }) => {
+          return results[0].event.type
+        }))
+    b()
+  }, [])
+  console.log(beer)
 
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider>
       <Box h="100vh" w="100vw" bgGradient="linear(135deg, cornsilk 0%, lemonchiffon 100%)">
         <Container maxW="5xl">
           <Stack
@@ -116,7 +126,7 @@ function App() {
           </Stack>
         </Container>
       </Box>
-    </ChakraProvider >
+    </ChakraProvider>
   );
 }
 
