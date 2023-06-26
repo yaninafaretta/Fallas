@@ -29,7 +29,7 @@
   "decisions": [
     {
       "conditions": {
-        "all": [
+        "any": [
           {
             "fact": "cuerpo",
             "operator": "equal",
@@ -78,7 +78,7 @@
     },
     {
       "conditions": {
-        "all": [
+        "any": [
           {
             "fact": "color",
             "operator": "equal",
@@ -132,7 +132,7 @@
     },
     {
       "conditions": {
-        "all": [
+        "any": [
           {
             "fact": "color",
             "operator": "equal",
@@ -181,7 +181,7 @@
     },
     {
       "conditions": {
-        "all": [
+        "any": [
           {
             "fact": "color",
             "operator": "equal",
@@ -230,7 +230,7 @@
     },
     {
       "conditions": {
-        "all": [
+        "any": [
           {
             "fact": "cuerpo",
             "operator": "equal",
@@ -279,7 +279,7 @@
     },
     {
       "conditions": {
-        "all": [
+        "any": [
           {
             "fact": "color",
             "operator": "equal",
@@ -328,7 +328,7 @@
     },
     {
       "conditions": {
-        "all": [
+        "any": [
           {
             "fact": "color",
             "operator": "equal",
@@ -377,7 +377,7 @@
     },
     {
       "conditions": {
-        "all": [
+        "any": [
           {
             "fact": "color",
             "operator": "equal",
