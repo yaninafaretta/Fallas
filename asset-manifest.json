@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/FallasI/static/js/main.fc04cbbc.js",
+    "main.js": "/FallasI/static/js/main.46ef1b65.js",
     "index.html": "/FallasI/index.html",
-    "main.fc04cbbc.js.map": "/FallasI/static/js/main.fc04cbbc.js.map"
+    "main.46ef1b65.js.map": "/FallasI/static/js/main.46ef1b65.js.map"
   },
   "entrypoints": [
-    "static/js/main.fc04cbbc.js"
+    "static/js/main.46ef1b65.js"
   ]
 }
