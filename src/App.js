@@ -168,7 +168,7 @@ function App() {
                           bg="orange.400"
                           placement="bottom"
                           isOpen={ABV !== null}
-                          label={ABVs[ABV]}
+                          label={ABVs[ABV - 1]}
                         >
                           <SliderThumb />
                         </Tooltip>
@@ -192,7 +192,7 @@ function App() {
                           bg="orange.400"
                           placement="bottom"
                           isOpen={IBU !== null}
-                          label={IBUs[IBU]}
+                          label={IBUs[IBU - 1]}
                         >
                           <SliderThumb />
                         </Tooltip>
