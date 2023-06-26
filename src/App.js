@@ -220,14 +220,19 @@ function App() {
                 </FormControl>
               </Box>
             </Stack>
-            {beer && (
+            {(beer && (
               <Heading fontSize="4xl">
                 Tu cerveza perfecta es...{" "}
                 <Text as="span" color={"orange.500"}>
                   {beer}
                 </Text>
               </Heading>
-            )}
+            )) ||
+              (!beer && (
+                <Heading fontSize="4xl">
+                  No tenemos una cerveza así registrada
+                </Heading>
+              ))}
           </Stack>
         </Container>
       </Box>
