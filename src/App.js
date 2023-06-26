@@ -15,10 +15,14 @@ import {
   SliderFilledTrack,
   SliderThumb,
   Tooltip,
-  Checkbox,
+  HStack,
+  Tag,
+  TagLeftIcon,
+  TagLabel,
 } from "@chakra-ui/react";
 import beers from "./beers.json";
 import { Engine } from "json-rules-engine";
+import { SmallAddIcon, SmallCloseIcon } from "@chakra-ui/icons";
 
 const engine = new Engine(beers.decisions);
 
@@ -81,12 +85,8 @@ function App() {
 
   return (
     <ChakraProvider>
-      <Box
-        h="100vh"
-        w="100vw"
-        bgGradient="linear(135deg, cornsilk 0%, lemonchiffon 100%)"
-      >
-        <Container maxW="5xl">
+      <Flex bgGradient="linear(135deg, cornsilk 0%, lemonchiffon 100%)">
+        <Container h="100vh" w="100vw">
           <Stack align={"center"} spacing={10} py={28}>
             <Heading fontSize="6xl">
               Beer{" "}
@@ -202,20 +202,25 @@ function App() {
 
                   <FormControl mt="4%">
                     <FormLabel>Maridajes</FormLabel>
-                    <Stack spacing={5} direction="row">
+                    <HStack spacing={2} flexWrap={"wrap"}>
                       {maridajes.map((m) => (
-                        <Checkbox
+                        <Tag
                           key={m}
+                          size="lg"
+                          variant="outline"
                           colorScheme="orange"
-                          isChecked={maridaje.includes(m)}
-                          onChange={() => {
+                          onClick={() => {
                             toggleMaridaje(m);
                           }}
+                          my={1}
+                          p={2}
+                          cursor="pointer"
                         >
-                          {m}
-                        </Checkbox>
+                          <TagLeftIcon as={maridaje.includes(m) ? SmallCloseIcon : SmallAddIcon} />
+                          <TagLabel>{m}</TagLabel>
+                        </Tag>
                       ))}
-                    </Stack>
+                    </HStack>
                   </FormControl>
                 </FormControl>
               </Box>
@@ -235,7 +240,7 @@ function App() {
               ))}
           </Stack>
         </Container>
-      </Box>
+      </Flex>
     </ChakraProvider>
   );
 }
