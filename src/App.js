@@ -76,7 +76,19 @@ function App() {
       };
       setBeer(
         await engine.run(facts).then(({ results }) => {
-          return results[0]?.event.type;
+          results.forEach((r) => {
+            r.conditionsMatched = r.conditions.any.reduce(
+              (acc, c) => acc + (c.result ? 1 : 0),
+              0
+            );
+          });
+          results = results.filter((r) => r.conditionsMatched >= 3);
+          results.sort((a, b) => b.conditionsMatched - a.conditionsMatched);
+          console.log(results);
+          return {
+            type: results[0]?.event.type,
+            conditionsMatched: results[0]?.conditionsMatched,
+          };
         })
       );
     };
@@ -216,7 +228,13 @@ function App() {
                           p={2}
                           cursor="pointer"
                         >
-                          <TagLeftIcon as={maridaje.includes(m) ? SmallCloseIcon : SmallAddIcon} />
+                          <TagLeftIcon
+                            as={
+                              maridaje.includes(m)
+                                ? SmallCloseIcon
+                                : SmallAddIcon
+                            }
+                          />
                           <TagLabel>{m}</TagLabel>
                         </Tag>
                       ))}
@@ -225,17 +243,20 @@ function App() {
                 </FormControl>
               </Box>
             </Stack>
-            {(beer && (
+            {(beer.type && (
               <Heading fontSize="4xl">
-                Tu cerveza perfecta es...{" "}
+                {(beer.conditionsMatched === 4 && "Una buena opción es...") ||
+                  (beer.conditionsMatched === 5 &&
+                    "Una muy buena opción es...") ||
+                  (beer.conditionsMatched === 6 && "Tu cerveza perfecta es...")}
                 <Text as="span" color={"orange.500"}>
-                  {beer}
+                  {beer.type}
                 </Text>
               </Heading>
             )) ||
-              (!beer && (
+              (!beer.type && (
                 <Heading fontSize="4xl">
-                  No tenemos una cerveza así registrada
+                  No tenemos una cerveza para recomendarte
                 </Heading>
               ))}
           </Stack>
