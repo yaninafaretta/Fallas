@@ -1,379 +1,383 @@
 {
-  "name": "beers",
-  "attributes": [
-    {
-      "name": "cuerpo",
-      "type": "string"
-    },
-    {
-      "name": "color",
-      "type": "string"
-    },
-    {
-      "name": "malta",
-      "type": "string"
-    },
-    {
-      "name": "IBU",
-      "type": "number"
-    },
-    {
-      "name": "ABV",
-      "type": "number"
-    },
-    {
-      "name": "maridaje",
-      "type": "array"
-    }
-  ],
-  "decisions": [
-    {
-      "conditions": {
-        "all": [
-          {
-            "fact": "cuerpo",
-            "operator": "equal",
-            "value": "completo"
-          },
-          {
-            "fact": "color",
-            "operator": "equal",
-            "value": "negra"
-          },
-          {
-            "fact": "malta",
-            "operator": "equal",
-            "value": "negra"
-          },
-          {
-            "fact": "IBU",
-            "operator": "equal",
-            "value": 4
-          },
-          {
-            "fact": "ABV",
-            "operator": "equal",
-            "value": 3
-          },
-          {
-            "fact": "maridaje",
-            "operator": "in",
-            "value": [
-              "torta",
-              "carnes rojas",
-              "carnes blancas",
-              "sola"
-            ]
-          }
-        ]
-      },
-      "event": {
-        "type": "Stout",
-        "params": {}
-      }
-    },
-    {
-      "conditions": {
-        "all": [
-          {
-            "fact": "color",
-            "operator": "equal",
-            "value": "clara"
-          },
-          {
-            "fact": "cuerpo",
-            "operator": "equal",
-            "value": "ligero"
-          },
-          {
-            "fact": "malta",
-            "operator": "equal",
-            "value": "pálida"
-          },
-          {
-            "fact": "IBU",
-            "operator": "equal",
-            "value": 1
-          },
-          {
-            "fact": "ABV",
-            "operator": "equal",
-            "value": 2
-          },
-          {
-            "fact": "maridaje",
-            "operator": "in",
-            "value": [
-              "carnes blancas",
-              "salado",
-              "sola"
-            ]
-          }
-        ]
-      },
-      "event": {
-        "type": "Lager",
-        "params": {}
-      }
-    },
-    {
-      "conditions": {
-        "all": [
-          {
-            "fact": "color",
-            "operator": "equal",
-            "value": "roja"
-          },
-          {
-            "fact": "cuerpo",
-            "operator": "equal",
-            "value": "medio"
-          },
-          {
-            "fact": "malta",
-            "operator": "equal",
-            "value": "caramelo"
-          },
-          {
-            "fact": "IBU",
-            "operator": "equal",
-            "value": 5
-          },
-          {
-            "fact": "ABV",
-            "operator": "equal",
-            "value": 5
-          },
-          {
-            "fact": "maridaje",
-            "operator": "in",
-            "value": [
-              "carnes rojas",
-              "sola"
-            ]
-          }
-        ]
-      },
-      "event": {
-        "type": "IPA",
-        "params": {}
-      }
-    },
-    {
-      "conditions": {
-        "all": [
-          {
-            "fact": "color",
-            "operator": "equal",
-            "value": "rubia"
-          },
-          {
-            "fact": "cuerpo",
-            "operator": "equal",
-            "value": "cremoso"
-          },
-          {
-            "fact": "malta",
-            "operator": "equal",
-            "value": "caramelo"
-          },
-          {
-            "fact": "IBU",
-            "operator": "equal",
-            "value": 2
-          },
-          {
-            "fact": "ABV",
-            "operator": "equal",
-            "value": 5
-          },
-          {
-            "fact": "maridaje",
-            "operator": "in",
-            "value": [
-              "carnes rojas",
-              "sola"
-            ]
-          }
-        ]
-      },
-      "event": {
-        "type": "Honey",
-        "params": {}
-      }
-    },
-    {
-      "conditions": {
-        "all": [
-          {
-            "fact": "cuerpo",
-            "operator": "equal",
-            "value": "medio"
-          },
-          {
-            "fact": "color",
-            "operator": "equal",
-            "value": "roja"
-          },
-          {
-            "fact": "IBU",
-            "operator": "equal",
-            "value": 3
-          },
-          {
-            "fact": "ABV",
-            "operator": "equal",
-            "value": 1
-          },
-          {
-            "fact": "malta",
-            "operator": "equal",
-            "value": "tostada"
-          },
-          {
-            "fact": "maridaje",
-            "operator": "in",
-            "value": [
-              "salado",
-              "sola"
-            ]
-          }
-        ]
-      },
-      "event": {
-        "type": "Ale sin alcohol",
-        "params": {}
-      }
-    },
-    {
-      "conditions": {
-        "all": [
-          {
-            "fact": "color",
-            "operator": "equal",
-            "value": "rubia"
-          },
-          {
-            "fact": "cuerpo",
-            "operator": "equal",
-            "value": "ligero"
-          },
-          {
-            "fact": "malta",
-            "operator": "equal",
-            "value": "pálida"
-          },
-          {
-            "fact": "IBU",
-            "operator": "equal",
-            "value": 1
-          },
-          {
-            "fact": "ABV",
-            "operator": "equal",
-            "value": 2
-          },
-          {
-            "fact": "maridaje",
-            "operator": "in",
-            "value": [
-              "carnes blancas",
-              "sola"
-            ]
-          }
-        ]
-      },
-      "event": {
-        "type": "Rubia",
-        "params": {}
-      }
-    },
-    {
-      "conditions": {
-        "all": [
-          {
-            "fact": "color",
-            "operator": "equal",
-            "value": "roja"
-          },
-          {
-            "fact": "cuerpo",
-            "operator": "equal",
-            "value": "medio"
-          },
-          {
-            "fact": "malta",
-            "operator": "equal",
-            "value": "tostada"
-          },
-          {
-            "fact": "IBU",
-            "operator": "equal",
-            "value": 3
-          },
-          {
-            "fact": "ABV",
-            "operator": "equal",
-            "value": 3
-          },
-          {
-            "fact": "maridaje",
-            "operator": "in",
-            "value": [
-              "quesos",
-              "sola"
-            ]
-          }
-        ]
-      },
-      "event": {
-        "type": "Ale Roja Irlandesa",
-        "params": {}
-      }
-    },
-    {
-      "conditions": {
-        "all": [
-          {
-            "fact": "color",
-            "operator": "equal",
-            "value": "negra"
-          },
-          {
-            "fact": "cuerpo",
-            "operator": "equal",
-            "value": "completo"
-          },
-          {
-            "fact": "malta",
-            "operator": "equal",
-            "value": "chocolate"
-          },
-          {
-            "fact": "IBU",
-            "operator": "equal",
-            "value": 5
-          },
-          {
-            "fact": "ABV",
-            "operator": "equal",
-            "value": 3
-          },
-          {
-            "fact": "maridaje",
-            "operator": "in",
-            "value": [
-              "carnes blancas",
-              "quesos",
-              "sola"
-            ]
-          }
-        ]
-      },
-      "event": {
-        "type": "Porter",
-        "params": {}
-      }
-    }
-  ]
+	"name": "beers",
+	"attributes": [
+		{
+			"name": "cuerpo",
+			"type": "string"
+		},
+		{
+			"name": "color",
+			"type": "string"
+		},
+		{
+			"name": "malta",
+			"type": "string"
+		},
+		{
+			"name": "IBU",
+			"type": "number"
+		},
+		{
+			"name": "ABV",
+			"type": "number"
+		},
+		{
+			"name": "maridaje",
+			"type": "array"
+		}
+	],
+	"decisions": [
+		{
+			"conditions": {
+				"all": [
+					{
+						"fact": "cuerpo",
+						"operator": "equal",
+						"value": "completo"
+					},
+					{
+						"fact": "color",
+						"operator": "equal",
+						"value": "negra"
+					},
+					{
+						"fact": "malta",
+						"operator": "equal",
+						"value": "negra"
+					},
+					{
+						"fact": "IBU",
+						"operator": "equal",
+						"value": 4
+					},
+					{
+						"fact": "ABV",
+						"operator": "equal",
+						"value": 3
+					},
+					{
+						"any": [
+							{
+								"fact": "maridaje",
+								"operator": "contains",
+								"value": "carnes rojas"
+							},
+							{
+								"fact": "maridaje",
+								"operator": "contains",
+								"value": "sola"
+							}
+						]
+					}
+				]
+			},
+			"event": {
+				"type": "stout",
+				"params": {}
+			}
+		},
+		{
+			"conditions": {
+				"all": [
+					{
+						"fact": "color",
+						"operator": "equal",
+						"value": "clara"
+					},
+					{
+						"fact": "cuerpo",
+						"operator": "equal",
+						"value": "ligero"
+					},
+					{
+						"fact": "malta",
+						"operator": "equal",
+						"value": "pálida"
+					},
+					{
+						"fact": "IBU",
+						"operator": "equal",
+						"value": 1
+					},
+					{
+						"fact": "ABV",
+						"operator": "equal",
+						"value": 2
+					},
+					{
+						"fact": "maridaje",
+						"operator": "in",
+						"value": [
+							"carnes blancas",
+							"salado",
+							"sola"
+						]
+					}
+				]
+			},
+			"event": {
+				"type": "Lager",
+				"params": {}
+			}
+		},
+		{
+			"conditions": {
+				"all": [
+					{
+						"fact": "color",
+						"operator": "equal",
+						"value": "roja"
+					},
+					{
+						"fact": "cuerpo",
+						"operator": "equal",
+						"value": "medio"
+					},
+					{
+						"fact": "malta",
+						"operator": "equal",
+						"value": "caramelo"
+					},
+					{
+						"fact": "IBU",
+						"operator": "equal",
+						"value": 5
+					},
+					{
+						"fact": "ABV",
+						"operator": "equal",
+						"value": 5
+					},
+					{
+						"fact": "maridaje",
+						"operator": "in",
+						"value": [
+							"carnes rojas",
+							"sola"
+						]
+					}
+				]
+			},
+			"event": {
+				"type": "IPA",
+				"params": {}
+			}
+		},
+		{
+			"conditions": {
+				"all": [
+					{
+						"fact": "color",
+						"operator": "equal",
+						"value": "rubia"
+					},
+					{
+						"fact": "cuerpo",
+						"operator": "equal",
+						"value": "cremoso"
+					},
+					{
+						"fact": "malta",
+						"operator": "equal",
+						"value": "caramelo"
+					},
+					{
+						"fact": "IBU",
+						"operator": "equal",
+						"value": 2
+					},
+					{
+						"fact": "ABV",
+						"operator": "equal",
+						"value": 5
+					},
+					{
+						"fact": "maridaje",
+						"operator": "in",
+						"value": [
+							"carnes rojas",
+							"sola"
+						]
+					}
+				]
+			},
+			"event": {
+				"type": "Honey",
+				"params": {}
+			}
+		},
+		{
+			"conditions": {
+				"all": [
+					{
+						"fact": "cuerpo",
+						"operator": "equal",
+						"value": "medio"
+					},
+					{
+						"fact": "color",
+						"operator": "equal",
+						"value": "roja"
+					},
+					{
+						"fact": "IBU",
+						"operator": "equal",
+						"value": 3
+					},
+					{
+						"fact": "ABV",
+						"operator": "equal",
+						"value": 1
+					},
+					{
+						"fact": "malta",
+						"operator": "equal",
+						"value": "tostada"
+					},
+					{
+						"fact": "maridaje",
+						"operator": "in",
+						"value": [
+							"salado",
+							"sola"
+						]
+					}
+				]
+			},
+			"event": {
+				"type": "Ale sin alcohol",
+				"params": {}
+			}
+		},
+		{
+			"conditions": {
+				"all": [
+					{
+						"fact": "color",
+						"operator": "equal",
+						"value": "rubia"
+					},
+					{
+						"fact": "cuerpo",
+						"operator": "equal",
+						"value": "ligero"
+					},
+					{
+						"fact": "malta",
+						"operator": "equal",
+						"value": "pálida"
+					},
+					{
+						"fact": "IBU",
+						"operator": "equal",
+						"value": 1
+					},
+					{
+						"fact": "ABV",
+						"operator": "equal",
+						"value": 2
+					},
+					{
+						"fact": "maridaje",
+						"operator": "in",
+						"value": [
+							"carnes blancas",
+							"sola"
+						]
+					}
+				]
+			},
+			"event": {
+				"type": "Rubia",
+				"params": {}
+			}
+		},
+		{
+			"conditions": {
+				"all": [
+					{
+						"fact": "color",
+						"operator": "equal",
+						"value": "roja"
+					},
+					{
+						"fact": "cuerpo",
+						"operator": "equal",
+						"value": "medio"
+					},
+					{
+						"fact": "malta",
+						"operator": "equal",
+						"value": "tostada"
+					},
+					{
+						"fact": "IBU",
+						"operator": "equal",
+						"value": 3
+					},
+					{
+						"fact": "ABV",
+						"operator": "equal",
+						"value": 3
+					},
+					{
+						"fact": "maridaje",
+						"operator": "in",
+						"value": [
+							"quesos",
+							"sola"
+						]
+					}
+				]
+			},
+			"event": {
+				"type": "Ale Roja Irlandesa",
+				"params": {}
+			}
+		},
+		{
+			"conditions": {
+				"all": [
+					{
+						"fact": "color",
+						"operator": "equal",
+						"value": "negra"
+					},
+					{
+						"fact": "cuerpo",
+						"operator": "equal",
+						"value": "completo"
+					},
+					{
+						"fact": "malta",
+						"operator": "equal",
+						"value": "chocolate"
+					},
+					{
+						"fact": "IBU",
+						"operator": "equal",
+						"value": 5
+					},
+					{
+						"fact": "ABV",
+						"operator": "equal",
+						"value": 3
+					},
+					{
+						"fact": "maridaje",
+						"operator": "in",
+						"value": [
+							"carnes blancas",
+							"quesos",
+							"sola"
+						]
+					}
+				]
+			},
+			"event": {
+				"type": "Porter",
+				"params": {}
+			}
+		}
+	]
 }
