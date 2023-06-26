@@ -96,7 +96,7 @@ function App() {
 
   return (
     <ChakraProvider>
-      <Flex h="100vh" w="100vw" bgGradient="linear(135deg, cornsilk 0%, lemonchiffon 100%)" justifyContent={"center"} p={8}>
+      <Flex h="100vh" w="100vw" bgGradient="linear(135deg, cornsilk 0%, lemonchiffon 100%)" justifyContent={"center"} pb={4} px={8} overflow="hidden">
           <Stack align={"center"} spacing={10} py={28}>
             <Heading fontSize="6xl">
               Beer{" "}
