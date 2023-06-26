@@ -1,7 +1,6 @@
 import React from "react";
 import {
   ChakraProvider,
-  Container,
   Text,
   Flex,
   Heading,
@@ -84,7 +83,7 @@ function App() {
           });
           results = results.filter((r) => r.conditionsMatched >= 3);
           results.sort((a, b) => b.conditionsMatched - a.conditionsMatched);
-          console.log(results);
+
           return {
             type: results[0]?.event.type,
             conditionsMatched: results[0]?.conditionsMatched,
@@ -97,8 +96,7 @@ function App() {
 
   return (
     <ChakraProvider>
-      <Flex bgGradient="linear(135deg, cornsilk 0%, lemonchiffon 100%)">
-        <Container h="100vh" w="100vw">
+      <Flex h="100vh" w="100vw" bgGradient="linear(135deg, cornsilk 0%, lemonchiffon 100%)" justifyContent={"center"} p={8}>
           <Stack align={"center"} spacing={10} py={28}>
             <Heading fontSize="6xl">
               Beer{" "}
@@ -243,24 +241,26 @@ function App() {
                 </FormControl>
               </Box>
             </Stack>
-            {(beer.type && (
+          {(beer?.type ? (
               <Heading fontSize="4xl">
-                {(beer.conditionsMatched === 4 && "Una buena opción es...") ||
+              {(beer.conditionsMatched < 4 &&
+                "Tal vez te gusta la cerveza... ") ||
+                (beer.conditionsMatched === 4 &&
+                  "Una buena opción es la cerveza... ") ||
                   (beer.conditionsMatched === 5 &&
-                    "Una muy buena opción es...") ||
-                  (beer.conditionsMatched === 6 && "Tu cerveza perfecta es...")}
+                  "Una muy buena opción es la cerveza... ") ||
+                (beer.conditionsMatched === 6 &&
+                  "Tu cerveza perfecta es la... ")}
                 <Text as="span" color={"orange.500"}>
                   {beer.type}
                 </Text>
               </Heading>
-            )) ||
-              (!beer.type && (
+          ) : (
                 <Heading fontSize="4xl">
                   No tenemos una cerveza para recomendarte
                 </Heading>
               ))}
-          </Stack>
-        </Container>
+        </Stack>
       </Flex>
     </ChakraProvider>
   );
