@@ -397,13 +397,13 @@ function App() {
                                                 cursor="pointer"
                                                 className="tag"
                                             >
-                                                <TagLeftIcon
+                                                {/* <TagLeftIcon
                                                     as={
                                                         maridaje.includes(m)
                                                             ? SmallCloseIcon
                                                             : SmallAddIcon
                                                     }
-                                                />
+                                                /> */}
                                                 <TagLabel>{m}</TagLabel>
                                             </Tag>
                                         ))}
