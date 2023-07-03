@@ -19,6 +19,15 @@ import {
     Tag,
     TagLeftIcon,
     TagLabel,
+    Button,
+    Spinner,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalCloseButton,
+    ModalBody,
+    Image,
+    FormErrorMessage,
 } from "@chakra-ui/react";
 import beers from "./beers.json";
 import { Engine } from "json-rules-engine";
@@ -48,12 +57,6 @@ const maridajes = [
     "Sola",
 ];
 
-const labelStyles = {
-    mt: "2",
-    ml: "-2.5",
-    fontSize: "sm",
-};
-
 function App() {
     const [beer, setBeer] = React.useState(null);
 
@@ -62,7 +65,17 @@ function App() {
     const [malta, setMalta] = React.useState(null);
     const [IBU, setIBU] = React.useState(null);
     const [ABV, setABV] = React.useState(null);
-    const [maridaje, setMaridaje] = React.useState([]);
+    const [maridaje, setMaridaje] = React.useState(["Sola"]);
+
+    const [errors, setErrors] = React.useState({
+        color: "",
+        cuerpo: "",
+        malta: "",
+    });
+
+    const [showLoader, setShowLoader] = React.useState(false);
+    const [showBeerRecomendation, setShowBeerRecomendation] =
+        React.useState(false);
 
     const toggleMaridaje = (m) => {
         if (maridaje.includes(m)) {
@@ -72,38 +85,68 @@ function App() {
         }
     };
 
-    React.useEffect(() => {
-        const b = async () => {
-            const facts = {
-                color: color,
-                cuerpo: cuerpo,
-                malta: malta,
-                IBU: IBU,
-                ABV: ABV,
-                maridaje: maridaje,
-            };
-            setBeer(
-                await engine.run(facts).then(({ results }) => {
-                    results.forEach((r) => {
-                        r.conditionsMatched = r.conditions.any.reduce(
-                            (acc, c) => acc + (c.result ? 1 : 0),
-                            0
-                        );
-                    });
-                    results = results.filter((r) => r.conditionsMatched >= 3);
-                    results.sort(
-                        (a, b) => b.conditionsMatched - a.conditionsMatched
-                    );
+    const checkValidations = (next) => {
+        setErrors((previousErrors) => ({
+            color: "",
+            cuerpo: "",
+            malta: "",
+        }));
+        if (!color) {
+            setErrors((previousErrors) => ({
+                ...previousErrors,
+                color: "Debe seleccionar un color",
+            }));
+        }
+        if (!cuerpo) {
+            setErrors((previousErrors) => ({
+                ...previousErrors,
+                cuerpo: "Debe seleccionar un cuerpo",
+            }));
+        }
+        if (!malta) {
+            setErrors((previousErrors) => ({
+                ...previousErrors,
+                malta: "Debe seleccionar una malta",
+            }));
+        }
+        if (color && cuerpo && malta) {
+            next();
+        }
+    };
 
-                    return {
-                        type: results[0]?.event.type,
-                        conditionsMatched: results[0]?.conditionsMatched,
-                    };
-                })
-            );
+    const obtainBeerRecomendation = async () => {
+        setShowLoader(true);
+        const facts = {
+            color: color,
+            cuerpo: cuerpo,
+            malta: malta,
+            IBU: IBU,
+            ABV: ABV,
+            maridaje: maridaje,
         };
-        b();
-    }, [ABV, IBU, color, cuerpo, malta, maridaje]);
+
+        setBeer(
+            await engine.run(facts).then(({ results }) => {
+                setShowLoader(false);
+                results.forEach((r) => {
+                    r.conditionsMatched = r.conditions.any.reduce(
+                        (acc, c) => acc + (c.result ? 1 : 0),
+                        0
+                    );
+                });
+                results = results.filter((r) => r.conditionsMatched >= 3);
+                results.sort(
+                    (a, b) => b.conditionsMatched - a.conditionsMatched
+                );
+
+                return {
+                    type: results[0]?.event.type,
+                    conditionsMatched: results[0]?.conditionsMatched,
+                };
+            })
+        );
+        setShowBeerRecomendation(true);
+    };
 
     return (
         <ChakraProvider>
@@ -160,7 +203,9 @@ function App() {
                                         onChange={(e) =>
                                             setColor(e.target.value)
                                         }
-                                        borderColor="gray.500"
+                                        borderColor={
+                                            errors.color ? "red" : "gray.500"
+                                        }
                                     >
                                         <option
                                             selected
@@ -176,6 +221,11 @@ function App() {
                                             </option>
                                         ))}
                                     </Select>
+                                    {errors.color && (
+                                        <Text className="field-error">
+                                            {errors.color}
+                                        </Text>
+                                    )}
                                 </FormControl>
 
                                 <FormControl>
@@ -203,7 +253,9 @@ function App() {
                                         onChange={(e) =>
                                             setCuerpo(e.target.value)
                                         }
-                                        borderColor="gray.500"
+                                        borderColor={
+                                            errors.cuerpo ? "red" : "gray.500"
+                                        }
                                     >
                                         <option
                                             selected
@@ -219,9 +271,13 @@ function App() {
                                             </option>
                                         ))}
                                     </Select>
+                                    {errors.cuerpo && (
+                                        <Text className="field-error">
+                                            {errors.cuerpo}
+                                        </Text>
+                                    )}
                                 </FormControl>
                             </Flex>
-
                             <FormControl mt="2%">
                                 <FormLabel>
                                     <Tooltip
@@ -245,7 +301,9 @@ function App() {
                                 </FormLabel>
                                 <Select
                                     onChange={(e) => setMalta(e.target.value)}
-                                    borderColor="gray.500"
+                                    borderColor={
+                                        errors.malta ? "red" : "gray.500"
+                                    }
                                 >
                                     <option selected hidden disabled value="">
                                         Seleccione un tipo de malta
@@ -256,8 +314,12 @@ function App() {
                                         </option>
                                     ))}
                                 </Select>
+                                {errors.malta && (
+                                    <Text className="field-error">
+                                        {errors.malta}
+                                    </Text>
+                                )}
                             </FormControl>
-
                             <FormControl mt={8}>
                                 <Flex>
                                     <FormControl mr={8}>
@@ -296,7 +358,7 @@ function App() {
                                                 hasArrow
                                                 bg="orange.400"
                                                 placement="bottom"
-                                                isOpen
+                                                isOpen={!showBeerRecomendation}
                                                 label={
                                                     ABV
                                                         ? ABVs[ABV - 1]
@@ -344,7 +406,7 @@ function App() {
                                                 hasArrow
                                                 bg="orange.400"
                                                 placement="bottom"
-                                                isOpen
+                                                isOpen={!showBeerRecomendation}
                                                 label={
                                                     IBU
                                                         ? IBUs[IBU - 1]
@@ -397,40 +459,80 @@ function App() {
                                                 cursor="pointer"
                                                 className="tag"
                                             >
-                                                {/* <TagLeftIcon
-                                                    as={
-                                                        maridaje.includes(m)
-                                                            ? SmallCloseIcon
-                                                            : SmallAddIcon
-                                                    }
-                                                /> */}
                                                 <TagLabel>{m}</TagLabel>
                                             </Tag>
                                         ))}
                                     </HStack>
                                 </FormControl>
+                                <FormControl className="button-container">
+                                    <Button
+                                        colorScheme="orange"
+                                        size="lg"
+                                        onClick={() =>
+                                            checkValidations(
+                                                obtainBeerRecomendation
+                                            )
+                                        }
+                                        width={"100px"}
+                                    >
+                                        {showLoader ? (
+                                            <Spinner color="white" />
+                                        ) : (
+                                            <>Enviar</>
+                                        )}
+                                    </Button>
+                                </FormControl>
                             </FormControl>
                         </Box>
                     </Stack>
-                    {beer?.type ? (
-                        <Heading fontSize="4xl">
-                            {(beer.conditionsMatched < 4 &&
-                                "Tal vez te gusta la cerveza... ") ||
-                                (beer.conditionsMatched === 4 &&
-                                    "Una buena opción es la cerveza... ") ||
-                                (beer.conditionsMatched === 5 &&
-                                    "Una muy buena opción es la cerveza... ") ||
-                                (beer.conditionsMatched === 6 &&
-                                    "Tu cerveza perfecta es la... ")}
-                            <Text as="span" color={"orange.500"}>
-                                {beer.type}
-                            </Text>
-                        </Heading>
-                    ) : (
-                        <Heading fontSize="4xl">
-                            No tenemos una cerveza para recomendarte
-                        </Heading>
-                    )}
+                    <Modal
+                        isOpen={showBeerRecomendation}
+                        onClose={() => setShowBeerRecomendation(false)}
+                    >
+                        <ModalOverlay />
+                        <ModalContent bgGradient="linear(135deg, cornsilk 0%, lemonchiffon 100%)">
+                            <ModalCloseButton />
+                            <ModalBody>
+                                <div className="image-container">
+                                    <Image
+                                        className="image"
+                                        src={
+                                            beer?.type
+                                                ? "https://www.pngmart.com/files/15/Happy-Face-Clipart-PNG.png"
+                                                : "https://cdn-icons-png.flaticon.com/512/5372/5372351.png"
+                                        }
+                                        alt="Dan Abramov"
+                                        boxSize="100px"
+                                    />
+                                </div>
+                                {beer?.type ? (
+                                    <Heading
+                                        fontSize="3xl"
+                                        className="modal-text"
+                                    >
+                                        {(beer.conditionsMatched < 4 &&
+                                            "Tal vez te gusta la cerveza... ") ||
+                                            (beer.conditionsMatched === 4 &&
+                                                "Una buena opción es la cerveza... ") ||
+                                            (beer.conditionsMatched === 5 &&
+                                                "Una muy buena opción es la cerveza... ") ||
+                                            (beer.conditionsMatched === 6 &&
+                                                "Tu cerveza perfecta es la... ")}
+                                        <Text as="span" color={"orange.500"}>
+                                            {beer.type}
+                                        </Text>
+                                    </Heading>
+                                ) : (
+                                    <Heading
+                                        fontSize="3xl"
+                                        className="modal-text"
+                                    >
+                                        No tenemos una cerveza para recomendarte
+                                    </Heading>
+                                )}
+                            </ModalBody>
+                        </ModalContent>
+                    </Modal>
                 </Stack>
             </Flex>
         </ChakraProvider>
