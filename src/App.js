@@ -166,6 +166,10 @@ function App() {
                             XP
                         </Text>
                     </Heading>
+                    <Heading fontSize="2xl">
+                        ¿Salis a comer y no saber que cerveza tomar? ¡Nosotros
+                        te ayudamos! 🍻
+                    </Heading>
                     <Stack spacing={6} direction={"row"}>
                         <Box
                             borderWidth="2px"
