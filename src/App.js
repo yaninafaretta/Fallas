@@ -479,7 +479,7 @@ function App() {
                                         {showLoader ? (
                                             <Spinner color="white" />
                                         ) : (
-                                            <>Enviar</>
+                                            <>Buscar Cerveza</>
                                         )}
                                     </Button>
                                 </FormControl>
