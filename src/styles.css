@@ -1,0 +1,41 @@
+* {
+    caret-color: transparent;
+}
+
+.tag {
+    transition: all 0.3s ease-in-out;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    width: 100%;
+}
+
+.image {
+    filter: invert(67%) sepia(46%) saturate(7243%) hue-rotate(353deg)
+        brightness(93%) contrast(85%);
+}
+
+.modal-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 10px;
+    text-align: center;
+}
+
+.field-error {
+    color: red;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
