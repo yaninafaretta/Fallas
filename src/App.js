@@ -10,14 +10,12 @@ import {
     FormLabel,
     Select,
     Slider,
-    SliderMark,
     SliderTrack,
     SliderFilledTrack,
     SliderThumb,
     Tooltip,
     HStack,
     Tag,
-    TagLeftIcon,
     TagLabel,
     Button,
     Spinner,
@@ -27,7 +25,6 @@ import {
     ModalCloseButton,
     ModalBody,
     Image,
-    FormErrorMessage,
 } from "@chakra-ui/react";
 import beers from "./beers.json";
 import { Engine } from "json-rules-engine";
