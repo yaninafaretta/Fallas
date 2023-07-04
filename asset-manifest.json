@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/FallasI/static/css/main.e0d6abeb.css",
-    "main.js": "/FallasI/static/js/main.a522648c.js",
+    "main.js": "/FallasI/static/js/main.c46dc6b2.js",
     "index.html": "/FallasI/index.html",
     "main.e0d6abeb.css.map": "/FallasI/static/css/main.e0d6abeb.css.map",
-    "main.a522648c.js.map": "/FallasI/static/js/main.a522648c.js.map"
+    "main.c46dc6b2.js.map": "/FallasI/static/js/main.c46dc6b2.js.map"
   },
   "entrypoints": [
     "static/css/main.e0d6abeb.css",
-    "static/js/main.a522648c.js"
+    "static/js/main.c46dc6b2.js"
   ]
 }
