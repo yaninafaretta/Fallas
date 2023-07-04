@@ -28,7 +28,7 @@ import {
 } from "@chakra-ui/react";
 import beers from "./beers.json";
 import { Engine } from "json-rules-engine";
-import { SmallAddIcon, SmallCloseIcon, InfoIcon } from "@chakra-ui/icons";
+import { InfoIcon } from "@chakra-ui/icons";
 
 import "./styles.css";
 
