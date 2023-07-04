@@ -474,7 +474,6 @@ function App() {
                                                 obtainBeerRecomendation
                                             )
                                         }
-                                        width={"100px"}
                                     >
                                         {showLoader ? (
                                             <Spinner color="white" />
