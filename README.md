@@ -1,6 +1,6 @@
 # BeerXP
 
-- Front: https://yaninafaretta.github.io/FallasI/
+- App: https://yaninafaretta.github.io/FallasI/
 - Component Library: https://chakra-ui.com/
 - Rule engine: https://github.com/cachecontrol/json-rules-engine
 - Rule editor: https://www.json-rule-editor.com/
