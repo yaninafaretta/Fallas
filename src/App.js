@@ -31,6 +31,7 @@ import { Engine } from "json-rules-engine";
 import { InfoIcon } from "@chakra-ui/icons";
 
 import "./styles.css";
+import { useHotkeys } from "react-hotkeys-hook";
 
 const engine = new Engine(beers.decisions);
 
@@ -81,6 +82,22 @@ function App() {
             setMaridaje([...maridaje, m]);
         }
     };
+
+    // Secret: tocar algun numero pre-carga una cerveza
+    useHotkeys('0,1,2,3,4,5,6,7', (e) => {
+        const n = parseInt(e.key)
+        const beer = beers.decisions[n]
+        const facts = beer.conditions.any
+        const getfact = (fact) => facts.find((c) => c.fact === fact)?.value
+        setColor(getfact('color'))
+        setCuerpo(getfact('cuerpo'))
+        setMalta(getfact('malta'))
+        setIBU(getfact('IBU'))
+        setABV(getfact('ABV'))
+
+        const maridajes = facts[facts.length - 1].any
+        setMaridaje(maridajes.map((c) => c.value))
+    })
 
     const checkValidations = (next) => {
         setErrors((previousErrors) => ({
@@ -207,9 +224,10 @@ function App() {
                                         borderColor={
                                             errors.color ? "red" : "gray.500"
                                         }
+                                        value={color ?? undefined}
+                                        defaultValue=""
                                     >
                                         <option
-                                            selected
                                             hidden
                                             disabled
                                             value=""
@@ -257,9 +275,10 @@ function App() {
                                         borderColor={
                                             errors.cuerpo ? "red" : "gray.500"
                                         }
+                                        value={cuerpo ?? undefined}
+                                        defaultValue=""
                                     >
                                         <option
-                                            selected
                                             hidden
                                             disabled
                                             value=""
@@ -305,8 +324,14 @@ function App() {
                                     borderColor={
                                         errors.malta ? "red" : "gray.500"
                                     }
+                                    value={malta ?? undefined}
+                                    defaultValue=""
                                 >
-                                    <option selected hidden disabled value="">
+                                    <option
+                                        hidden
+                                        disabled
+                                        value=""
+                                    >
                                         Seleccione un tipo de malta
                                     </option>
                                     {maltas.map((malta) => (
@@ -350,7 +375,7 @@ function App() {
                                             step={1}
                                             onChange={setABV}
                                             colorScheme="orange"
-                                            defaultValue={3}
+                                            value={ABV ?? 3}
                                         >
                                             <SliderTrack>
                                                 <SliderFilledTrack />
@@ -398,7 +423,7 @@ function App() {
                                             step={1}
                                             onChange={setIBU}
                                             colorScheme="orange"
-                                            defaultValue={3}
+                                            value={IBU ?? 3}
                                         >
                                             <SliderTrack>
                                                 <SliderFilledTrack />
