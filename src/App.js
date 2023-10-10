@@ -26,7 +26,6 @@ import {
     ModalBody,
     Image,
 } from "@chakra-ui/react";
-import beers from "./beers.json";
 import rules from "./Engine/rules.json";
 import ForwardChainingEngine from "./Engine/ForwardChainingEngine"
 import { InfoIcon } from "@chakra-ui/icons";
@@ -87,9 +86,9 @@ function App() {
     // Secret: tocar algun numero pre-carga una cerveza
     useHotkeys('0,1,2,3,4,5,6,7', (e) => {
         const n = parseInt(e.key)
-        const beer = beers.decisions[n]
-        const facts = beer.conditions.any
-        const getfact = (fact) => facts.find((c) => c.fact === fact)?.value
+        const beer = rules[n];
+        const facts = beer.conditions
+        const getfact = (fact) => facts.find((c) => c.key === fact)?.value
         setColor(getfact('color'))
         setCuerpo(getfact('cuerpo'))
         setMalta(getfact('malta'))
