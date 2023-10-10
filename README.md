@@ -1,10 +1,9 @@
 # BeerXP
 
-- App: https://yaninafaretta.github.io/FallasI/
+- App: https://yaninafaretta.github.io/Fallas/
 - Component Library: https://chakra-ui.com/
-- Rule engine previo: https://github.com/cachecontrol/json-rules-engine
-- Rule engine nuevo: src/Engine/ForwardChainingEngine.js
-- Rule editor: https://www.json-rule-editor.com/
+- [fallas1] rule engine: https://github.com/cachecontrol/json-rules-engine + https://www.json-rule-editor.com/
+- [fallas2] rule engine: [`src/Engine/ForwardChainingEngine.js`](src/Engine/ForwardChainingEngine.js)
 
 ```zsh
 npm install        # install deps
