@@ -6,20 +6,25 @@ class ForwardChainingEngine {
 
   _countEqualConditionsMatched(conditions) {
     let count = 0;
-    conditions.forEach((condition) => {
-      if (this.facts[condition.key] === condition.value) {
-        count++;
-      }
-    });
+    conditions
+      .filter((c) => !c.any)
+      .forEach((condition) => {
+        if (this.facts[condition.key] === condition.value) {
+          count++;
+        }
+      });
     return count;
   }
 
   _countAnyConditionsMatched(conditions) {
     let count = 0;
     conditions
-      .filter((c) => c?.any)
+      .filter((c) => c.any)
+      .map((c) => c.any)
       .forEach((condition) => {
-        if (this.facts[condition.key] === condition.value) {
+        const values = this.facts[condition[0].key];
+        const conditionvalues = condition.map((c) => c.value);
+        if (values && values.some((v) => conditionvalues.includes(v))) {
           count++;
         }
       });

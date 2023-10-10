@@ -140,9 +140,9 @@ function App() {
         };
 
         const results = engine.run(facts);
-        setBeer({
-            type: results[0]?.recommendation || 'No se encontró una cerveza',
-            conditionsMatched: results[0]?.conditionsMatched || 0,
+        setBeer(results.length && {
+            type: results[0].recommendation,
+            conditionsMatched: results[0].conditionsMatched,
         });
         setShowBeerRecomendation(true);
         setShowLoader(false);
