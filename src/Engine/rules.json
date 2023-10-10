@@ -1,0 +1,322 @@
+[
+  {
+      "conditions": [
+          {
+              "key": "cuerpo",
+              "value": "Completo"
+          },
+          {
+              "key": "color",
+              "value": "Negra"
+          },
+          {
+              "key": "malta",
+              "value": "Negra"
+          },
+          {
+              "key": "IBU",
+              "value": 4
+          },
+          {
+              "key": "ABV",
+              "value": 3
+          },
+          {
+              "any": [
+                  {
+                      "key": "maridaje",
+                      "value": "Carnes rojas"
+                  },
+                  {
+                      "key": "maridaje",
+                      "value": "Sola"
+                  }
+              ]
+          }
+      ],
+      "action": {
+          "recommendation": "Stout"
+      }
+  },
+  {
+      "conditions": [
+          {
+              "key": "color",
+              "value": "Clara"
+          },
+          {
+              "key": "cuerpo",
+              "value": "Ligero"
+          },
+          {
+              "key": "malta",
+              "value": "Pálida"
+          },
+          {
+              "key": "IBU",
+              "value": 1
+          },
+          {
+              "key": "ABV",
+              "value": 2
+          },
+          {
+              "any": [
+                  {
+                      "key": "maridaje",
+                      "value": "Carnes blancas"
+                  },
+                  {
+                      "key": "maridaje",
+                      "value": "Salado"
+                  },
+                  {
+                      "key": "maridaje",
+                      "value": "Sola"
+                  }
+              ]
+          }
+      ],
+      "action": {
+          "recommendation": "Lager"
+      }
+  },
+  {
+      "conditions": [
+          {
+              "key": "color",
+              "value": "Roja"
+          },
+          {
+              "key": "cuerpo",
+              "value": "Medio"
+          },
+          {
+              "key": "malta",
+              "value": "Caramelo"
+          },
+          {
+              "key": "IBU",
+              "value": 5
+          },
+          {
+              "key": "ABV",
+              "value": 5
+          },
+          {
+              "any": [
+                  {
+                      "key": "maridaje",
+                      "value": "Carnes rojas"
+                  },
+                  {
+                      "key": "maridaje",
+                      "value": "Sola"
+                  }
+              ]
+          }
+      ],
+      "action": {
+          "recommendation": "IPA"
+      }
+  },
+  {
+      "conditions": [
+          {
+              "key": "color",
+              "value": "Rubia"
+          },
+          {
+              "key": "cuerpo",
+              "value": "Cremoso"
+          },
+          {
+              "key": "malta",
+              "value": "Caramelo"
+          },
+          {
+              "key": "IBU",
+              "value": 2
+          },
+          {
+              "key": "ABV",
+              "value": 5
+          },
+          {
+              "any": [
+                  {
+                      "key": "maridaje",
+                      "value": "Carnes rojas"
+                  },
+                  {
+                      "key": "maridaje",
+                      "value": "Sola"
+                  }
+              ]
+          }
+      ],
+      "action": {
+          "recommendation": "Honey"
+      }
+  },
+  {
+      "conditions": [
+          {
+              "key": "cuerpo",
+              "value": "Medio"
+          },
+          {
+              "key": "color",
+              "value": "Roja"
+          },
+          {
+              "key": "IBU",
+              "value": 3
+          },
+          {
+              "key": "ABV",
+              "value": 1
+          },
+          {
+              "key": "malta",
+              "value": "Tostada"
+          },
+          {
+              "any": [
+                  {
+                      "key": "maridaje",
+                      "value": "Salado"
+                  },
+                  {
+                      "key": "maridaje",
+                      "value": "Sola"
+                  }
+              ]
+          }
+      ],
+      "action": {
+          "recommendation": "Ale sin alcohol"
+      }
+  },
+  {
+      "conditions": [
+          {
+              "key": "color",
+              "value": "Rubia"
+          },
+          {
+              "key": "cuerpo",
+              "value": "Ligero"
+          },
+          {
+              "key": "malta",
+              "value": "Pálida"
+          },
+          {
+              "key": "IBU",
+              "value": 1
+          },
+          {
+              "key": "ABV",
+              "value": 2
+          },
+          {
+              "any": [
+                  {
+                      "key": "maridaje",
+                      "value": "Carnes blancas"
+                  },
+                  {
+                      "key": "maridaje",
+                      "value": "Sola"
+                  }
+              ]
+          }
+      ],
+      "action": {
+          "recommendation": "Rubia"
+      }
+  },
+  {
+      "conditions": [
+          {
+              "key": "color",
+              "value": "Roja"
+          },
+          {
+              "key": "cuerpo",
+              "value": "Medio"
+          },
+          {
+              "key": "malta",
+              "value": "Tostada"
+          },
+          {
+              "key": "IBU",
+              "value": 3
+          },
+          {
+              "key": "ABV",
+              "value": 3
+          },
+          {
+              "any": [
+                  {
+                      "key": "maridaje",
+                      "value": "Quesos"
+                  },
+                  {
+                      "key": "maridaje",
+                      "value": "Sola"
+                  }
+              ]
+          }
+      ],
+      "action": {
+          "recommendation": "Ale Roja Irlandesa"
+      }
+  },
+  {
+      "conditions": [
+          {
+              "key": "color",
+              "value": "Negra"
+          },
+          {
+              "key": "cuerpo",
+              "value": "Completo"
+          },
+          {
+              "key": "malta",
+              "value": "Chocolate"
+          },
+          {
+              "key": "IBU",
+              "value": 5
+          },
+          {
+              "key": "ABV",
+              "value": 3
+          },
+          {
+              "any": [
+                  {
+                      "key": "maridaje",
+                      "value": "Carnes blancas"
+                  },
+                  {
+                      "key": "maridaje",
+                      "value": "Quesos"
+                  },
+                  {
+                      "key": "maridaje",
+                      "value": "Quesos"
+                  }
+              ]
+          }
+      ],
+      "action": {
+          "recommendation": "Porter"
+      }
+  }
+]
