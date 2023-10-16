@@ -26,14 +26,14 @@ import {
     ModalBody,
     Image,
 } from "@chakra-ui/react";
-import beers from "./beers.json";
-import { Engine } from "json-rules-engine";
+import rules from "./Engine/rules.json";
+import ForwardChainingEngine from "./Engine/ForwardChainingEngine"
 import { InfoIcon } from "@chakra-ui/icons";
 
 import "./styles.css";
 import { useHotkeys } from "react-hotkeys-hook";
 
-const engine = new Engine(beers.decisions);
+const engine = new ForwardChainingEngine(rules);
 
 const colors = ["Clara", "Rubia", "Roja", "Negra"];
 const cuerpos = ["Ligero", "Medio", "Completo", "Cremoso"];
@@ -86,9 +86,9 @@ function App() {
     // Secret: tocar algun numero pre-carga una cerveza
     useHotkeys('0,1,2,3,4,5,6,7', (e) => {
         const n = parseInt(e.key)
-        const beer = beers.decisions[n]
-        const facts = beer.conditions.any
-        const getfact = (fact) => facts.find((c) => c.fact === fact)?.value
+        const beer = rules[n];
+        const facts = beer.conditions
+        const getfact = (fact) => facts.find((c) => c.key === fact)?.value
         setColor(getfact('color'))
         setCuerpo(getfact('cuerpo'))
         setMalta(getfact('malta'))
@@ -139,27 +139,13 @@ function App() {
             maridaje: maridaje,
         };
 
-        setBeer(
-            await engine.run(facts).then(({ results }) => {
-                setShowLoader(false);
-                results.forEach((r) => {
-                    r.conditionsMatched = r.conditions.any.reduce(
-                        (acc, c) => acc + (c.result ? 1 : 0),
-                        0
-                    );
-                });
-                results = results.filter((r) => r.conditionsMatched >= 3);
-                results.sort(
-                    (a, b) => b.conditionsMatched - a.conditionsMatched
-                );
-
-                return {
-                    type: results[0]?.event.type,
-                    conditionsMatched: results[0]?.conditionsMatched,
-                };
-            })
-        );
+        const results = engine.run(facts);
+        setBeer(results.length && {
+            type: results[0].recommendation,
+            conditionsMatched: results[0].conditionsMatched,
+        });
         setShowBeerRecomendation(true);
+        setShowLoader(false);
     };
 
     return (
