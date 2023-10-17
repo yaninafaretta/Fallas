@@ -151,8 +151,6 @@ function App() {
     return (
         <ChakraProvider>
             <Flex
-                h="100vh"
-                w="100vw"
                 bgGradient="linear(135deg, cornsilk 0%, lemonchiffon 100%)"
                 justifyContent={"center"}
                 pb={4}
